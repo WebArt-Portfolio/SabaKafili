@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evan Gallery Group Exhibition | Saba Kafili</title>
+    
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --card-bg: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --accent-color: #000000;
+            --border-color: #cbd5e1;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
+
+        /* Top bar and navigation */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-btn {
+            color: var(--text-main);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            border-color: #000000;
+            color: #000000;
+        }
+
+        /* Hamburger menu */
+        .menu-container {
+            position: relative;
+        }
+
+        .menu-toggle-btn {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid var(--border-color);
+            color: #000000;
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            font-size: 1.4rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle-btn:hover {
+            background: #000000;
+            color: #ffffff;
+            border-color: #000000;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 55px;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 240px;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+
+        .dropdown-menu a, .dropdown-menu button {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: background 0.2s;
+            display: block;
+            text-align: left;
+            background: none;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .dropdown-menu a:hover, .dropdown-menu button:hover {
+            background: var(--card-bg);
+            color: #000000;
+        }
+
+        /* Main content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .gallery-header h1 {
+            font-size: 2.3rem;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+
+        .gallery-header h1 span {
+            font-size: 1.2rem;
+            display: block;
+            font-weight: normal;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        .gallery-desc {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.15rem;
+            color: var(--text-main);
+            background: var(--card-bg);
+            padding: 25px 35px;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid #000000;
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            line-height: 2.1;
+        }
+
+        /* Image Grid */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .artwork-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .artwork-card:hover {
+            transform: translateY(-6px);
+            border-color: #000000;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+
+        .image-container {
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+            background: #f1f5f9;
+            cursor: pointer;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .artwork-card:hover .image-container img {
+            transform: scale(1.06);
+        }
+
+        .artwork-info {
+            padding: 20px;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .info-en {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            text-align: left;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Lightbox modal */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            object-fit: contain;
+            animation: zoomIn 0.3s ease;
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: color 0.3s;
+        }
+
+        .close-lightbox:hover {
+            color: #cbd5e1;
+        }
+
+        /* Education Modal */
+        .education-modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .education-modal.active {
+            display: flex;
+        }
+
+        .education-card-content {
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 12px;
+            max-width: 550px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            margin-top: 80px;
+            background: #f8fafc;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .top-bar { padding: 15px 20px; }
+            .gallery-header h1 { font-size: 1.8rem; }
+            .image-container { height: 260px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <a href="index.html" class="back-btn">&larr; Back to Home</a>
+        
+        <!-- Hamburger Menu -->
+        <div class="menu-container">
+            <button class="menu-toggle-btn" onclick="toggleMenu()" aria-label="Site Menu">
+                &#9776;
+            </button>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="index.html">Home</a>
+                <a href="mailto:kafilisaba@gmail.com">Email</a>
+                <a href="https://www.instagram.com/sabakafili?igsh=MTBsNWR4Mm0zODN1Ng==" target="_blank">Instagram</a>
+                <button onclick="openEducationModal()">Education</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="gallery-header">
+            <h1>Group Exhibition, Evan Gallery <span>(2023)</span></h1>
+            <div class="gallery-desc">
+                "Wave Dynamics" is a reflection on movement, change, and transformation; on the interaction of forces that continuously reshape form and meaning.
+            </div>
+        </div>
+
+        <!-- Artwork Grid -->
+        <div class="image-grid">
+
+            <!-- Artwork 1 -->
+            <div class="artwork-card">
+                <div class="image-container" onclick="openLightbox('images/Evan_Capsul_01.png')">
+                    <img src="images/Evan_Capsul_01.png" alt="Evan Capsul 01">
+                </div>
+                <div class="artwork-info">
+                    <p class="info-en">
+                        <strong>Tube Collection</strong><br>
+                        Dimensions: 200 &times; 100 cm<br>
+                        Mixed Media
+                    </p>
+                </div>
+            </div>
+
+            <!-- Artwork 2 -->
+            <div class="artwork-card">
+                <div class="image-container" onclick="openLightbox('images/Evan_Capsul_02.png')">
+                    <img src="images/Evan_Capsul_02.png" alt="Evan Capsul 02">
+                </div>
+                <div class="artwork-info">
+                    <p class="info-en">
+                        <strong>Tube Collection</strong><br>
+                        Dimensions: 200 &times; 100 cm<br>
+                        Mixed Media
+                    </p>
+                </div>
+            </div>
+
+            <!-- Artwork 3 -->
+            <div class="artwork-card">
+                <div class="image-container" onclick="openLightbox('images/Evan_Wave_06.png')">
+                    <img src="images/Evan_Wave_06.png" alt="Evan Wave 06">
+                </div>
+                <div class="artwork-info">
+                    <p class="info-en">
+                        <strong>Tube Collection</strong><br>
+                        Dimensions: 200 &times; 100 cm<br>
+                        Mixed Media
+                    </p>
+                </div>
+            </div>
+
+            <!-- Artwork 4 -->
+            <div class="artwork-card">
+                <div class="image-container" onclick="openLightbox('images/Evan_Wave_03.png')">
+                    <img src="images/Evan_Wave_03.png" alt="Evan Wave 03">
+                </div>
+                <div class="artwork-info">
+                    <p class="info-en">
+                        <strong>Wave</strong><br>
+                        Dimensions: 125 &times; 115 cm<br>
+                        Mixed Media
+                    </p>
+                </div>
+            </div>
+
+            <!-- Artwork 5 -->
+            <div class="artwork-card">
+                <div class="image-container" onclick="openLightbox('images/Evan_Wave_012.png')">
+                    <img src="images/Evan_Wave_012.png" alt="Evan Wave 012">
+                </div>
+                <div class="artwork-info">
+                    <p class="info-en">
+                        <strong>Wave</strong><br>
+                        Dimensions: 125 &times; 115 cm<br>
+                        Mixed Media
+                    </p>
+                </div>
+            </div>
+
+            <!-- Artwork 6 -->
+            <div class="artwork-card">
+                <div class="image-container" onclick="openLightbox('images/Evan_Wave_04.png')">
+                    <img src="images/Evan_Wave_04.png" alt="Evan Wave 04">
+                </div>
+                <div class="artwork-info">
+                    <p class="info-en">
+                        <strong>Wave</strong><br>
+                        Dimensions: 125 cm<br>
+                        Mixed Media<br>
+                        Part of the "Dynamic" Collection
+                    </p>
+                </div>
+            </div>
+
+            <!-- Artwork 7 -->
+            <div class="artwork-card">
+                <div class="image-container" onclick="openLightbox('images/Evan_Wave_02.png')">
+                    <img src="images/Evan_Wave_02.png" alt="Evan Wave 02">
+                </div>
+                <div class="artwork-info">
+                    <p class="info-en">
+                        <strong>Wave</strong><br>
+                        Dimensions: 100 &times; 150 cm<br>
+                        Mixed Media on Canvas<br>
+                        Part of the "Dynamic" Collection
+                    </p>
+                </div>
+            </div>
+
+            <!-- Artwork 8 -->
+            <div class="artwork-card">
+                <div class="image-container" onclick="openLightbox('images/Evan_Wave_010.png')">
+                    <img src="images/Evan_Wave_010.png" alt="Evan Wave 010">
+                </div>
+                <div class="artwork-info">
+                    <p class="info-en">
+                        <strong>Wave</strong><br>
+                        Dimensions: 115 &times; 125 cm<br>
+                        Mixed Media<br>
+                        Part of the "Dynamic" Collection
+                    </p>
+                </div>
+            </div>
+
+            <!-- Artwork 9 -->
+            <div class="artwork-card">
+                <div class="image-container" onclick="openLightbox('images/Evan_Wave_011.png')">
+                    <img src="images/Evan_Wave_011.png" alt="Evan Wave 011">
+                </div>
+                <div class="artwork-info">
+                    <p class="info-en">
+                        <strong>Wave</strong><br>
+                        Dimensions: 115 &times; 100 cm<br>
+                        Mixed Media<br>
+                        Part of the "Dynamic" Collection
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <button class="close-lightbox">&times;</button>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <!-- Education Modal -->
+    <div id="educationModal" class="education-modal" onclick="closeEducationModalOutside(event)">
+        <div class="education-card-content">
+            <button onclick="closeEducationModal()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #333;">&times;</button>
+            
+            <h2 style="margin-top: 0; color: #000; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; font-size: 1.3rem;">Education & Certificates</h2>
+            
+            <div style="margin: 20px 0; line-height: 2;">
+                <p style="margin-bottom: 15px;">
+                    🎓 <strong>Bachelor of Arts in Graphic Design</strong><br>
+                    <span style="color: var(--text-muted);">Soore University (Graduated 2007)</span>
+                </p>
+                <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 15px 0;">
+                <p style="margin-bottom: 0;">
+                    📜 <strong>Child Painting Instructor Certificate</strong><br>
+                    <span style="color: var(--text-muted);">Issued by: Technical and Vocational Training Organization (174 hours)</span>
+                </p>
+            </div>
+            
+            <div style="text-align: center; margin-top: 25px;">
+                <button onclick="closeEducationModal()" style="background: #000; color: #fff; border: none; padding: 10px 25px; border-radius: 8px; cursor: pointer; font-weight: bold;">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>All Rights Reserved &copy; 2026 Saba Kafili</p>
+    </footer>
+
+    <script>
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = src;
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('dropdownMenu');
+            if (menu.style.display === 'flex') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'flex';
+            }
+        }
+
+        function openEducationModal() {
+            document.getElementById('educationModal').classList.add('active');
+            document.getElementById('dropdownMenu').style.display = 'none';
+        }
+
+        function closeEducationModal() {
+            document.getElementById('educationModal').classList.remove('active');
+        }
+
+        function closeEducationModalOutside(event) {
+            const modalContent = document.querySelector('.education-card-content');
+            if (!modalContent.contains(event.target)) {
+                closeEducationModal();
+            }
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.menu-toggle-btn') && !event.target.closest('.menu-toggle-btn')) {
+                const menu = document.getElementById('dropdownMenu');
+                if (menu && menu.style.display === 'flex') {
+                    menu.style.display = 'none';
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
