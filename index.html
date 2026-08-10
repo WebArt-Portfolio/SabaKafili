@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saba Kafili Portfolio | صبا کفیلی</title>
+    <title>Saba Kafili | Visual Artist Portfolio</title>
 
     <style>
         :root {
-            --bg-color: #ffffff;
-            --card-bg: #f8fafc;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --accent-color: #000000;
-            --border-color: #cbd5e1;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-color: #38bdf8;
+            --border-color: #334155;
+            --hover-border: #38bdf8;
         }
 
         body {
-            font-family: Arial, sans-serif, 'Tahoma';
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
@@ -25,7 +26,7 @@
             scroll-behavior: smooth;
         }
 
-        /* Hamburger menu at the top corner of the page */
+        /* Hamburger menu at the top corner */
         .menu-container {
             position: absolute;
             top: 25px;
@@ -34,25 +35,27 @@
         }
 
         .menu-toggle-btn {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(30, 41, 59, 0.85);
             border: 1px solid var(--border-color);
-            color: #000000;
+            color: var(--text-main);
             width: 45px;
             height: 45px;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 1.4rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
             transition: all 0.3s ease;
         }
 
         .menu-toggle-btn:hover {
-            background: #000000;
-            color: #ffffff;
-            border-color: #000000;
+            background: var(--accent-color);
+            color: #0f172a;
+            border-color: var(--accent-color);
+            transform: scale(1.05);
         }
 
         .dropdown-menu {
@@ -60,25 +63,25 @@
             position: absolute;
             top: 55px;
             right: 0;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(12px);
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(16px);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            width: 240px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            width: 210px;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
 
         .dropdown-menu a, .dropdown-menu button {
             color: var(--text-main);
             text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: bold;
-            padding: 8px 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 10px 14px;
             border-radius: 8px;
-            transition: background 0.2s;
+            transition: all 0.2s;
             display: block;
             text-align: left;
             background: none;
@@ -89,96 +92,75 @@
         }
 
         .dropdown-menu a:hover, .dropdown-menu button:hover {
-            background: var(--card-bg);
-            color: #000000;
+            background: var(--accent-color);
+            color: #0f172a;
+            padding-left: 18px;
         }
 
         /* Hero cover */
         .hero-cover {
             position: relative;
-            min-height: 420px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.75)), url('images/Vali_02.png') center/cover no-repeat;
-            filter: saturate(1.2) brightness(1.05);
+            min-height: 440px;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.85)), url('images/Vali_02.png') center/cover no-repeat;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 35px 20px;
-            border-bottom: 2px solid var(--border-color);
+            padding: 40px 20px;
+            border-bottom: 1px solid var(--border-color);
             text-align: center;
         }
 
-        .hero-content {
-            margin: 0;
-        }
-
         .hero-content h1 {
-            font-size: 2.8rem;
-            margin: 0 0 8px 0;
-            color: #000000;
-            font-weight: 700;
+            font-size: 3.2rem;
+            margin: 0 0 10px 0;
+            color: #ffffff;
+            font-weight: 800;
+            letter-spacing: -0.5px;
         }
 
         .hero-content h1 span {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             display: block;
-            font-weight: normal;
-            color: #334155;
-            margin-top: 5px;
-        }
-
-        .hero-content p {
-            font-size: 1.1rem;
-            color: #000000;
-            margin: 0;
-            font-weight: 600;
+            font-weight: 500;
+            color: var(--accent-color);
+            margin-top: 8px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 50px 20px;
         }
 
         /* About section */
         .about-section {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-left: 4px solid #000000;
-            padding: 25px 30px;
-            border-radius: 12px;
-            margin-bottom: 50px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            border-left: 4px solid var(--accent-color);
+            padding: 30px 35px;
+            border-radius: 16px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
         .about-section h2 {
-            font-size: 1.5rem;
-            color: #000000;
+            font-size: 1.6rem;
+            color: #ffffff;
             margin-top: 0;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
+            font-weight: 700;
         }
 
-        .lang-block {
-            margin-bottom: 20px;
-        }
-        
-        .lang-block:last-child {
-            margin-bottom: 0;
-        }
-
-        .about-preview, .about-full, .about-en {
-            font-size: 1.05rem;
-            color: var(--text-main);
+        .about-preview, .about-full {
+            font-size: 1.1rem;
+            color: #e2e8f0;
             text-align: justify;
             margin: 0;
-            line-height: 2.1;
-        }
-
-        .about-en {
-            color: #334155;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px dashed var(--border-color);
+            line-height: 2.2;
+            font-weight: 400;
         }
 
         .about-full {
@@ -188,63 +170,64 @@
         .about-toggle-btn {
             background: none;
             border: none;
-            color: #000000;
+            color: var(--accent-color);
             font-family: inherit;
-            font-size: 0.95rem;
-            font-weight: bold;
+            font-size: 1rem;
+            font-weight: 700;
             cursor: pointer;
             padding: 0;
-            margin-top: 15px;
+            margin-top: 18px;
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             transition: opacity 0.2s;
         }
 
         .about-toggle-btn:hover {
-            opacity: 0.7;
+            opacity: 0.8;
             text-decoration: underline;
         }
 
         .section-title {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            border-left: 4px solid #000000;
-            padding-left: 15px;
-            color: #000000;
+            font-size: 2.2rem;
+            margin-bottom: 35px;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 18px;
+            color: #ffffff;
+            font-weight: 800;
         }
 
         /* Exhibitions grid */
         .exhibitions-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 35px;
         }
 
         .exhibition-card {
-            background: #ffffff;
+            background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
             text-decoration: none;
             color: inherit;
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             display: flex;
             flex-direction: column;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
         }
 
         .exhibition-card:hover {
-            transform: translateY(-6px);
-            border-color: #000000;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-8px);
+            border-color: var(--hover-border);
+            box-shadow: 0 20px 40px rgba(56, 189, 248, 0.15);
         }
 
         .card-img-container {
             width: 100%;
-            height: 320px;
+            height: 340px;
             overflow: hidden;
-            background: #f1f5f9;
+            background: #0f172a;
         }
 
         .card-img-container img {
@@ -255,14 +238,13 @@
         }
 
         .exhibition-card:hover .card-img-container img {
-            transform: scale(1.06);
+            transform: scale(1.07);
         }
 
         .card-content {
-            padding: 15px 20px;
+            padding: 20px 25px;
             display: flex;
             flex-direction: column;
-            gap: 5px;
             background: var(--card-bg);
             border-top: 1px solid var(--border-color);
         }
@@ -274,27 +256,20 @@
         }
 
         .card-content h3 {
-            font-size: 1rem;
+            font-size: 1.1rem;
             margin: 0;
-            color: #000000;
-            font-weight: bold;
-        }
-
-        .card-content .card-title-en {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin: 0;
-            text-align: left;
+            color: #ffffff;
+            font-weight: 700;
         }
 
         .card-content span {
-            font-size: 0.85rem;
-            color: #000000;
-            font-weight: bold;
-            background: #fff;
-            padding: 3px 10px;
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            font-weight: 700;
+            background: rgba(56, 189, 248, 0.1);
+            padding: 4px 12px;
             border-radius: 20px;
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(56, 189, 248, 0.2);
         }
 
         /* Education modal style */
@@ -306,8 +281,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(8px);
             justify-content: center;
             align-items: center;
             padding: 20px;
@@ -318,13 +293,13 @@
         }
 
         .education-card-content {
-            background: #ffffff;
-            padding: 35px;
-            border-radius: 12px;
-            max-width: 550px;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            max-width: 580px;
             width: 100%;
             position: relative;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
             text-align: left;
             border: 1px solid var(--border-color);
         }
@@ -332,18 +307,17 @@
         /* Footer */
         footer {
             text-align: center;
-            padding: 30px 0;
+            padding: 40px 0;
             border-top: 1px solid var(--border-color);
             color: var(--text-muted);
-            font-size: 0.9rem;
-            background: #f8fafc;
-            margin-top: 60px;
+            font-size: 0.95rem;
+            background: rgba(15, 23, 42, 0.5);
+            margin-top: 80px;
         }
 
         @media (max-width: 768px) {
-            .hero-cover { min-height: auto; padding: 50px 15px 40px 15px; }
-            .hero-content h1 { font-size: 2.2rem; }
-            .hero-content h1 span { font-size: 1.2rem; }
+            .hero-cover { min-height: auto; padding: 60px 15px 40px 15px; }
+            .hero-content h1 { font-size: 2.4rem; }
             .card-img-container { height: 260px; }
             .menu-container { top: 15px; right: 15px; }
         }
@@ -351,31 +325,30 @@
 </head>
 <body>
 
-    <!-- Hero cover with hamburger menu in the top corner -->
+    <!-- Hero cover with hamburger menu -->
     <header class="hero-cover">
         <div class="menu-container">
             <button class="menu-toggle-btn" onclick="toggleMenu()" aria-label="Site Menu">
                 ☰
             </button>
             <div class="dropdown-menu" id="dropdownMenu">
-                <a href="index.html">Home / صفحه اصلی</a>
-                <a href="mailto:kafilisaba@gmail.com">Email / ارسال ایمیل</a>
-                <a href="https://www.instagram.com/sabakafili?igsh=MTBsNWR4Mm0zODN1Ng==" target="_blank">Instagram / اینستاگرام</a>
-                <button onclick="openEducationModal()">Education / تحصیلات</button>
+                <a href="index.html">Home</a>
+                <a href="mailto:kafilisaba@gmail.com">Email Me</a>
+                <a href="https://www.instagram.com/sabakafili?igsh=MTBsNWR4Mm0zODN1Ng==" target="_blank">Instagram</a>
+                <button onclick="openEducationModal()">Education</button>
             </div>
         </div>
 
         <div class="hero-content">
-            <h1>Saba Kafili<span>صبا کفیلی</span></h1>
-            <p>Visual Arts | هنرهای تجسمی</p>
+            <h1>Saba Kafili <span>Visual Artist & Painter</span></h1>
         </div>
     </header>
 
     <div class="container">
         
-        <!-- About the Artist (Bilingual and Accordion) -->
+        <!-- About the Artist -->
         <section class="about-section">
-            <h2>Artist Statement / بیانیه هنرمند</h2>
+            <h2>Artist Statement</h2>
             <div class="about-text-container">
                 <div class="lang-block">
                     <p class="about-preview" id="aboutPreview">
@@ -386,16 +359,11 @@
                     </div>
                 </div>
 
-                <!-- Persian translation block -->
-                <div class="about-en" style="direction: rtl; text-align: justify; font-family: 'Tahoma', Arial, sans-serif;">
-                    فعالیت هنری من بر تجربه‌گرایی در متریال و جست‌وجوی ظرفیت‌های بیانی مواد مختلف استوار است. در فرآیند خلق آثار، بسته به ایده و مفهوم هر پروژه، از نقاشی، کلاژ یا عناصر حجمی استفاده می‌کنم و گاهی نیز این رسانه‌ها را در کنار یکدیگر به کار می‌گیرم. برای من، انتخاب مدیوم بخشی از شکل‌گیری ایده است و هر اثر مسیر و زبان بصری خود را می‌طلبد. طبیعت یکی از مهم‌ترین سرچشمه‌های الهام در کارهایم است؛ نه صرفاً به‌عنوان موضوع، بلکه به‌عنوان بستری برای مطالعه‌ی بافت، رشد، دگرگونی، فرسایش و روابط میان عناصر. علاقه‌مندم از طریق آزمون و خطا با متریال‌های گوناگون، کیفیت‌های بصری و حسی تازه‌ای کشف کنم و امکان‌های متفاوت هر ماده را در فرآیند خلق اثر بیازمایم. برای من، فرآیند خلق اثر به اندازه‌ی نتیجه اهمیت دارد. تجربه، کشف و تعامل با مواد، هسته‌ی اصلی رویکرد هنری‌ام را شکل می‌دهد و هر پروژه فرصتی است برای شناخت عمیق‌تر رابطه‌ی میان طبیعت، ماده و بیان بصری.
-                </div>
-
-                <button class="about-toggle-btn" id="toggleBtn" onclick="toggleAbout()">Read More ↓ / ادامه مطلب (انگلیسی)</button>
+                <button class="about-toggle-btn" id="toggleBtn" onclick="toggleAbout()">Read More ↓</button>
             </div>
         </section>
 
-        <h2 class="section-title">Exhibitions & Works / فهرست نمایشگاه‌ها و آثار</h2>
+        <h2 class="section-title">Exhibitions & Works</h2>
         
         <div class="exhibitions-grid">
             <!-- Evan Gallery 2023 -->
@@ -408,7 +376,6 @@
                         <h3>Group Exhibition, Evan Gallery</h3>
                         <span>2023</span>
                     </div>
-                    <p class="card-title-en" style="direction: rtl; text-align: right; font-family: 'Tahoma', Arial, sans-serif;">نمایشگاه گروهی، گالری ایوان (۱۴۰۲)</p>
                 </div>
             </a>
 
@@ -422,7 +389,6 @@
                         <h3>Group Exhibition, Novan Gallery</h3>
                         <span>2021</span>
                     </div>
-                    <p class="card-title-en" style="direction: rtl; text-align: right; font-family: 'Tahoma', Arial, sans-serif;">نمایشگاه گروهی، گالری نووان (۱۴۰۰)</p>
                 </div>
             </a>
 
@@ -436,7 +402,6 @@
                         <h3>Group Exhibition, Vali Gallery</h3>
                         <span>2019–2020</span>
                     </div>
-                    <p class="card-title-en" style="direction: rtl; text-align: right; font-family: 'Tahoma', Arial, sans-serif;">نمایشگاه گروهی، گالری والی (۱۳۹۸)</p>
                 </div>
             </a>
 
@@ -450,7 +415,6 @@
                         <h3>Group Exhibition, Sobhan Gallery</h3>
                         <span>2013–2014</span>
                     </div>
-                    <p class="card-title-en" style="direction: rtl; text-align: right; font-family: 'Tahoma', Arial, sans-serif;">نمایشگاه گروهی، گالری سبحان (۱۳۹۲)</p>
                 </div>
             </a>
 
@@ -464,7 +428,6 @@
                         <h3>Group Exhibition, Sobhan Gallery</h3>
                         <span>2011–2012</span>
                     </div>
-                    <p class="card-title-en" style="direction: rtl; text-align: right; font-family: 'Tahoma', Arial, sans-serif;">نمایشگاه گروهی، گالری سبحان (۱۳۹۰)</p>
                 </div>
             </a>
 
@@ -478,7 +441,6 @@
                         <h3>Free Works / Studio</h3>
                         <span>Present</span>
                     </div>
-                    <p class="card-title-en" style="direction: rtl; text-align: right; font-family: 'Tahoma', Arial, sans-serif;">کارهای آزاد / استودیو (۱۴۰۳–اکنون)</p>
                 </div>
             </a>
         </div>
@@ -487,32 +449,30 @@
     <!-- Education Modal -->
     <div id="educationModal" class="education-modal" onclick="closeEducationModalOutside(event)">
         <div class="education-card-content">
-            <button onclick="closeEducationModal()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #333;">&times;</button>
+            <button onclick="closeEducationModal()" style="position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--text-muted);">&times;</button>
             
-            <h2 style="margin-top: 0; color: #000; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; font-size: 1.3rem;">Education & Certificates / سوابق تحصیلی</h2>
+            <h2 style="margin-top: 0; color: #ffffff; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; font-size: 1.4rem;">Education & Certificates</h2>
             
-            <div style="margin: 20px 0; line-height: 2;">
+            <div style="margin: 20px 0; line-height: 2.2;">
                 <p style="margin-bottom: 15px;">
-                    🎓 <strong>Bachelor of Arts in Graphic Design</strong><br>
-                    <span style="color: var(--text-muted);">Soore University (Graduated 2007)</span><br>
-                    <span style="font-size: 0.9rem; color: var(--text-muted); font-family: 'Tahoma', Arial, sans-serif; direction: rtl; display: inline-block;">کارشناسی گرافیک، دانشگاه سوره (فارغ‌التحصیل ۱۳۸۶)</span>
+                    🎓 <strong style="color: #fff;">Bachelor of Arts in Graphic Design</strong><br>
+                    <span style="color: var(--text-muted);">Soore University (Graduated 2007)</span>
                 </p>
                 <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 15px 0;">
                 <p style="margin-bottom: 0;">
-                    📜 <strong>Child Painting Instructor Certificate</strong><br>
-                    <span style="color: var(--text-muted);">Issuer: Technical and Vocational Training Organization (Duration: 174 hours)</span><br>
-                    <span style="font-size: 0.9rem; color: var(--text-muted); font-family: 'Tahoma', Arial, sans-serif; direction: rtl; display: inline-block;">گواهینامه مهارت مربی نقاشی کودک، سازمان آموزش فنی و حرفه‌ای کشور (۱۷۴ ساعت)</span>
+                    📜 <strong style="color: #fff;">Child Painting Instructor Certificate</strong><br>
+                    <span style="color: var(--text-muted);">Issuer: Technical and Vocational Training Organization (Duration: 174 hours)</span>
                 </p>
             </div>
             
-            <div style="text-align: center; margin-top: 25px;">
-                <button onclick="closeEducationModal()" style="background: #000; color: #fff; border: none; padding: 10px 25px; border-radius: 8px; cursor: pointer; font-weight: bold;">Close / بستن</button>
+            <div style="text-align: center; margin-top: 30px;">
+                <button onclick="closeEducationModal()" style="background: var(--accent-color); color: #0f172a; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer; font-weight: 700;">Close</button>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>All Rights Reserved © 2026 Saba Kafili | تمامی حقوق محفوظ است</p>
+        <p>All Rights Reserved &copy; 2026 Saba Kafili</p>
     </footer>
 
     <!-- Menu management scripts -->
@@ -525,11 +485,11 @@
             if (fullText.style.display === 'block') {
                 fullText.style.display = 'none';
                 previewText.style.display = 'block';
-                btn.innerHTML = 'Read More ↓ / ادامه مطلب (انگلیسی)';
+                btn.innerHTML = 'Read More ↓';
             } else {
                 fullText.style.display = 'block';
                 previewText.style.display = 'none';
-                btn.innerHTML = 'Close ↑ / بستن متن';
+                btn.innerHTML = 'Close ↑';
             }
         }
 
@@ -558,7 +518,6 @@
             }
         }
 
-        // Close menu when clicking anywhere outside of it
         window.onclick = function(event) {
             if (!event.target.matches('.menu-toggle-btn') && !event.target.closest('.menu-toggle-btn')) {
                 const menu = document.getElementById('dropdownMenu');
