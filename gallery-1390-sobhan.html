@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobhan Gallery Group Exhibition 2011 (Gender) | Saba Kafili</title>
+    
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --card-bg: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --accent-color: #000000;
+            --border-color: #cbd5e1;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
+
+        /* Header and Navigation */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-btn {
+            color: var(--text-main);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            border-color: #000000;
+            color: #000000;
+        }
+
+        /* Hamburger Menu */
+        .menu-container {
+            position: relative;
+        }
+
+        .menu-toggle-btn {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid var(--border-color);
+            color: #000000;
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            font-size: 1.4rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle-btn:hover {
+            background: #000000;
+            color: #ffffff;
+            border-color: #000000;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 55px;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 220px;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+
+        .dropdown-menu a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: background 0.2s;
+            display: block;
+        }
+
+        .dropdown-menu a:hover {
+            background: var(--card-bg);
+            color: #000000;
+        }
+
+        /* Main Content and Description */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .gallery-header h1 {
+            font-size: 2.3rem;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+
+        .gallery-header h1 span {
+            font-size: 1.1rem;
+            display: block;
+            font-weight: normal;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        .gallery-subtitle {
+            font-size: 1.2rem;
+            color: #000000;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .gallery-subtitle span {
+            font-size: 1rem;
+            display: block;
+            font-weight: normal;
+            color: var(--text-muted);
+            margin-top: 3px;
+        }
+
+        .gallery-desc {
+            max-width: 850px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            background: var(--card-bg);
+            padding: 25px 35px;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid #000000;
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            line-height: 2.0;
+        }
+
+        .gallery-desc-fa {
+            font-family: 'Tahoma', 'B Nazanin', Arial, sans-serif;
+            color: var(--text-muted);
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed var(--border-color);
+            font-size: 1rem;
+            direction: rtl;
+            text-align: right;
+        }
+
+        /* Image Grid with Smooth Motion */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .image-item-wrapper {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .image-item-wrapper:nth-child(1) { animation-delay: 0.1s; }
+        .image-item-wrapper:nth-child(2) { animation-delay: 0.2s; }
+        .image-item-wrapper:nth-child(3) { animation-delay: 0.3s; }
+        .image-item-wrapper:nth-child(4) { animation-delay: 0.4s; }
+        .image-item-wrapper:nth-child(5) { animation-delay: 0.5s; }
+        .image-item-wrapper:nth-child(6) { animation-delay: 0.6s; }
+
+        .image-item-wrapper:hover {
+            transform: translateY(-6px);
+            border-color: #000000;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+
+        .image-container {
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+            background: #f8fafc;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.6s ease;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.04);
+        }
+
+        /* Lightbox Modal */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            object-fit: contain;
+            animation: zoomIn 0.3s ease;
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: color 0.3s;
+        }
+
+        .close-lightbox:hover {
+            color: #cbd5e1;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            margin-top: 80px;
+            background: #f8fafc;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .top-bar { padding: 15px 20px; }
+            .gallery-header h1 { font-size: 1.8rem; }
+            .image-container { height: 260px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <a href="index-en.html" class="back-btn">← Back to Home / بازگشت به خانه</a>
+        
+        <!-- Hamburger Menu -->
+        <div class="menu-container">
+            <button class="menu-toggle-btn" onclick="toggleMenu()" aria-label="Site Menu">
+                ☰
+            </button>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="index-en.html">Home</a>
+                <a href="mailto:kafilisaba@gmail.com">Email</a>
+                <a href="https://instagram.com/saba_kafili_art" target="_blank">Instagram</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="gallery-header">
+            <h1>Group Exhibition, Sobhan Gallery (2011)<span>نمایشگاه گروهی، گالری سبحان (۱۳۹۰)</span></h1>
+            <div class="gallery-subtitle">
+                Gender
+                <span>جنسیت</span>
+            </div>
+            <div class="gallery-desc">
+                This collection views gender not as a fixed essence, but as an identity shaped through interaction with the body, culture, and social structures.<br><br>
+                Flowers, with their living and mutable nature, serve as a metaphor for the body, while resin, through its transparency and rigidity, freezes these forms at a specific moment—simultaneously preserving and constraining identity.
+                <div class="gallery-desc-fa">
+                    این مجموعه نگاهی است به جنسیت، نه به‌عنوان امری ثابت، بلکه به‌مثابه هویتی که در تعامل با بدن، فرهنگ و ساختارهای اجتماعی شکل می‌گیرد.<br><br>
+                    گل، با ماهیتی زنده و تغییرپذیر، استعاره‌ای از بدن است و رزین، با شفافیت و سختی خود، این فرم‌ها را در لحظه‌ای خاص منجمد می‌کند؛ گویی هویت را هم‌زمان حفظ و محدود می‌سازد.
+                </div>
+            </div>
+        </div>
+
+        <!-- Image Grid -->
+        <div class="image-grid">
+            <div class="image-item-wrapper">
+                <div class="image-container" onclick="openLightbox('images/Sobhan_Gender_01.png')">
+                    <img src="images/Sobhan_Gender_01.png" alt="Sobhan Gender 01">
+                </div>
+            </div>
+
+            <div class="image-item-wrapper">
+                <div class="image-container" onclick="openLightbox('images/Sobhan_Gender_02.png')">
+                    <img src="images/Sobhan_Gender_02.png" alt="Sobhan Gender 02">
+                </div>
+            </div>
+
+            <div class="image-item-wrapper">
+                <div class="image-container" onclick="openLightbox('images/Sobhan_Gender_03.png')">
+                    <img src="images/Sobhan_Gender_03.png" alt="Sobhan Gender 03">
+                </div>
+            </div>
+
+            <div class="image-item-wrapper">
+                <div class="image-container" onclick="openLightbox('images/Sobhan_Gender_04.png')">
+                    <img src="images/Sobhan_Gender_04.png" alt="Sobhan Gender 04">
+                </div>
+            </div>
+
+            <div class="image-item-wrapper">
+                <div class="image-container" onclick="openLightbox('images/Sobhan_Gender_05.png')">
+                    <img src="images/Sobhan_Gender_05.png" alt="Sobhan Gender 05">
+                </div>
+            </div>
+
+            <div class="image-item-wrapper">
+                <div class="image-container" onclick="openLightbox('images/Sobhan_Gender_06.png')">
+                    <img src="images/Sobhan_Gender_06.png" alt="Sobhan Gender 06">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <button class="close-lightbox" onclick="closeLightbox()">&times;</button>
+        <img class="lightbox-content" id="lightbox-img" onclick="event.stopPropagation()">
+    </div>
+
+    <footer>
+        <p>All Rights Reserved © 2026 Saba Kafili | تمامی حقوق محفوظ است © ۲۰۲۶ صبا کفیلی</p>
+    </footer>
+
+    <script>
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = src;
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('dropdownMenu');
+            menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        // Close menu when clicking outside
+        window.onclick = function(event) {
+            if (!event.target.matches('.menu-toggle-btn') && !event.target.closest('.menu-toggle-btn')) {
+                const menu = document.getElementById('dropdownMenu');
+                if (menu && menu.style.display === 'flex') {
+                    menu.style.display = 'none';
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
