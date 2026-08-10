@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novan Gallery Group Exhibition | Saba Kafili</title>
+    
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --card-bg: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --accent-color: #000000;
+            --border-color: #cbd5e1;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
+
+        /* Top bar and navigation */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-btn {
+            color: var(--text-main);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            border-color: #000000;
+            color: #000000;
+        }
+
+        /* Hamburger menu */
+        .menu-container {
+            position: relative;
+        }
+
+        .menu-toggle-btn {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid var(--border-color);
+            color: #000000;
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            font-size: 1.4rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle-btn:hover {
+            background: #000000;
+            color: #ffffff;
+            border-color: #000000;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 55px;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 220px;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+
+        .dropdown-menu a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: background 0.2s;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-menu a:hover {
+            background: var(--card-bg);
+            color: #000000;
+        }
+
+        /* Main content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .gallery-header h1 {
+            font-size: 2.3rem;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+
+        .gallery-header h1 span {
+            font-size: 1.2rem;
+            display: block;
+            font-weight: normal;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        .gallery-desc {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.15rem;
+            color: var(--text-main);
+            background: var(--card-bg);
+            padding: 25px 35px;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid #000000;
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            line-height: 2.1;
+        }
+
+        /* Image Grid */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .artwork-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .artwork-card:hover {
+            transform: translateY(-6px);
+            border-color: #000000;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+
+        .image-container {
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+            background: #f8fafc;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.6s ease;
+        }
+
+        .artwork-card:hover .image-container img {
+            transform: scale(1.04);
+        }
+
+        .artwork-info {
+            padding: 20px;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .info-en {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            text-align: left;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        /* Lightbox modal */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            object-fit: contain;
+            animation: zoomIn 0.3s ease;
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: color 0.3s;
+        }
+
+        .close-lightbox:hover {
+            color: #cbd5e1;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            margin-top: 80px;
+            background: #f8fafc;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .top-bar { padding: 15px 20px; }
+            .gallery-header h1 { font-size: 1.8rem; }
+            .image-container { height: 260px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <a href="index.html" class="back-btn">&larr; Back to Home</a>
+        
+        <!-- Hamburger Menu -->
+        <div class="menu-container">
+            <button class="menu-toggle-btn" onclick="toggleMenu()" aria-label="Site Menu">
+                &#9776;
+            </button>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="index.html">Home</a>
+                <a href="mailto:kafilisaba@gmail.com">Email</a>
+                <a href="https://instagram.com/saba_kafili_art" target="_blank">Instagram</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="gallery-header">
+            <h1>Group Exhibition, Novan Gallery <span>(2021)</span></h1>
+            <div class="gallery-desc">
+                The works are based on a free interpretation of the book "Faraj baad az Sheddat" (Relief after Grief) written by Qadi Abu Ali Mohsen al-Tanukhi in the 3rd century AH.
+            </div>
+        </div>
+
+        <!-- Artwork Grid -->
+        <div class="image-grid">
+
+            <!-- Artwork 1 -->
+            <div class="artwork-card">
+                <div class="image-container" onclick="openLightbox('images/Novan_Farag_01.png')">
+                    <img src="images/Novan_Farag_01.png" alt="Novan Farag 01">
+                </div>
+                <div class="artwork-info">
+                    <p class="info-en">
+                        <strong>Free interpretation of "Relief after Grief"</strong><br>
+                        Papier-mâché / Circle &bull; Diameter: 40 cm &bull; Height: 9 cm
+                    </p>
+                </div>
+            </div>
+
+            <!-- Artwork 2 -->
+            <div class="artwork-card">
+                <div class="image-container" onclick="openLightbox('images/Novan_Farag_02.png')">
+                    <img src="images/Novan_Farag_02.png" alt="Novan Farag 02">
+                </div>
+                <div class="artwork-info">
+                    <p class="info-en">
+                        <strong>Free interpretation of "Relief after Grief"</strong><br>
+                        Papier-mâché / Circle &bull; Diameter: 50 cm &bull; Height: 14.5 cm
+                    </p>
+                </div>
+            </div>
+
+            <!-- Artwork 3 -->
+            <div class="artwork-card">
+                <div class="image-container" onclick="openLightbox('images/Novan_Farag_03.png')">
+                    <img src="images/Novan_Farag_03.png" alt="Novan Farag 03">
+                </div>
+                <div class="artwork-info">
+                    <p class="info-en">
+                        <strong>Free interpretation of "Relief after Grief"</strong><br>
+                        Papier-mâché / Circle &bull; Diameter: 50 cm &bull; Height: 10 cm
+                    </p>
+                </div>
+            </div>
+
+            <!-- Artwork 4 -->
+            <div class="artwork-card">
+                <div class="image-container" onclick="openLightbox('images/Novan_Farag_04.png')">
+                    <img src="images/Novan_Farag_04.png" alt="Novan Farag 04">
+                </div>
+                <div class="artwork-info">
+                    <p class="info-en">
+                        <strong>Free interpretation of "Relief after Grief"</strong><br>
+                        Papier-mâché / Circle &bull; Diameter: 40 cm &bull; Height: 10 cm
+                    </p>
+                </div>
+            </div>
+
+            <!-- Artwork 5 -->
+            <div class="artwork-card">
+                <div class="image-container" onclick="openLightbox('images/Novan_Farag_05.png')">
+                    <img src="images/Novan_Farag_05.png" alt="Novan Farag 05">
+                </div>
+                <div class="artwork-info">
+                    <p class="info-en">
+                        <strong>Free interpretation of "Relief after Grief"</strong><br>
+                        Papier-mâché / Circle &bull; Diameter: 40 cm &bull; Height: 10 cm
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <button class="close-lightbox" onclick="closeLightbox()">&times;امل</button>
+        <img class="lightbox-content" id="lightbox-img" onclick="event.stopPropagation()">
+    </div>
+
+    <footer>
+        <p>All Rights Reserved &copy; 2026 Saba Kafili</p>
+    </footer>
+
+    <script>
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = src;
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('dropdownMenu');
+            menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.menu-toggle-btn') && !event.target.closest('.menu-toggle-btn')) {
+                const menu = document.getElementById('dropdownMenu');
+                if (menu && menu.style.display === 'flex') {
+                    menu.style.display = 'none';
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
