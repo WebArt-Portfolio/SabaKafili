@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>گالری آثار آزاد | صبا کفیلی</title>
+    
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --card-bg: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --accent-color: #000000;
+            --border-color: #cbd5e1;
+        }
+
+        body {
+            font-family: 'Tahoma', 'B Nazanin', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.9;
+        }
+
+        /* هدر و ناوبری */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-btn {
+            color: var(--text-main);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            border-color: #000000;
+            color: #000000;
+        }
+
+        /* منوی همبرگری در بالا */
+        .menu-container {
+            position: relative;
+        }
+
+        .menu-toggle-btn {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid var(--border-color);
+            color: #000000;
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            font-size: 1.4rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle-btn:hover {
+            background: #000000;
+            color: #ffffff;
+            border-color: #000000;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 55px;
+            left: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 220px;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+
+        .dropdown-menu a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: background 0.2s;
+            display: block;
+        }
+
+        .dropdown-menu a:hover {
+            background: var(--card-bg);
+            color: #000000;
+        }
+
+        /* محتوای اصلی و توضیحات */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .gallery-header h1 {
+            font-size: 2.5rem;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+
+        .gallery-header h1 span {
+            font-size: 1.3rem;
+            display: block;
+            font-weight: normal;
+            color: var(--text-muted);
+            margin-top: 5px;
+            font-family: Arial, sans-serif;
+            direction: ltr;
+        }
+
+        .gallery-desc {
+            max-width: 850px;
+            margin: 0 auto;
+            font-size: 1.15rem;
+            color: var(--text-main);
+            background: var(--card-bg);
+            padding: 25px 35px;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            border-right: 4px solid #000000;
+            text-align: justify;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            line-height: 2.1;
+        }
+
+        .gallery-desc-en {
+            direction: ltr;
+            text-align: left;
+            font-family: Arial, sans-serif;
+            color: var(--text-muted);
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed var(--border-color);
+            font-size: 1rem;
+        }
+
+        /* گرید تصاویر با موشن زیبا */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .image-item-wrapper {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        /* تأخیر آبشاری برای کارت‌ها */
+        .image-item-wrapper:nth-child(1) { animation-delay: 0.1s; }
+        .image-item-wrapper:nth-child(2) { animation-delay: 0.2s; }
+        .image-item-wrapper:nth-child(3) { animation-delay: 0.3s; }
+        .image-item-wrapper:nth-child(4) { animation-delay: 0.4s; }
+        .image-item-wrapper:nth-child(5) { animation-delay: 0.5s; }
+        .image-item-wrapper:nth-child(6) { animation-delay: 0.6s; }
+        .image-item-wrapper:nth-child(7) { animation-delay: 0.7s; }
+        .image-item-wrapper:nth-child(8) { animation-delay: 0.8s; }
+        .image-item-wrapper:nth-child(9) { animation-delay: 0.9s; }
+        .image-item-wrapper:nth-child(10) { animation-delay: 1.0s; }
+
+        .image-item-wrapper:hover {
+            transform: translateY(-6px);
+            border-color: #000000;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+
+        .image-container {
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+            background: #f8fafc;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.6s ease;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.04);
+        }
+
+        /* مدال (بزرگنمایی عکس با کلیک) */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            object-fit: contain;
+            animation: zoomIn 0.3s ease;
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 25px;
+            left: 35px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: color 0.3s;
+        }
+
+        .close-lightbox:hover {
+            color: #cbd5e1;
+        }
+
+        /* انیمیشن‌ها */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            margin-top: 80px;
+            background: #f8fafc;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .top-bar { padding: 15px 20px; }
+            .gallery-header h1 { font-size: 2rem; }
+            .image-container { height: 260px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <a href="index.html" class="back-btn">← بازگشت به صفحه اصلی / Back</a>
+        
+        <!-- منوی همبرگری -->
+        <div class="menu-container">
+            <button class="menu-toggle-btn" onclick="toggleMenu()" aria-label="منوی سایت">
+                ☰
+            </button>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="index.html">صفحه اصلی / Home</a>
+                <a href="mailto:kafilisaba@gmail.com">ارسال ایمیل / Email</a>
+                <a href="https://instagram.com/saba_kafili_art" target="_blank">اینستاگرام / Instagram</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="gallery-header">
+            <h1>گالری آثار آزاد<span>Free Works Gallery</span></h1>
+            <div class="gallery-desc">
+                مجموعه‌ای از آثار آزاد و تجربی، شامل نقاشی‌ها، تصویرسازی‌ها و پروژه‌های بین‌رشته‌ای که در فضایی رها از چارچوب‌های مرسوم شکل گرفته‌اند.
+                <div class="gallery-desc-en">
+                    A collection of free and experimental works, including paintings, illustrations, and interdisciplinary projects formed beyond conventional frameworks.
+                </div>
+            </div>
+        </div>
+
+        <!-- گرید تصاویر آثار آزاد (۱۰ تصویر) -->
+        <div class="image-grid">
+            <div class="image-item-wrapper">
+                <div class="image-container" onclick="openLightbox('images/Free_01.png')">
+                    <img src="images/Free_01.png" alt="Free Work 01">
+                </div>
+            </div>
+
+            <div class="image-item-wrapper">
+                <div class="image-container" onclick="openLightbox('images/Free_02.png')">
+                    <img src="images/Free_02.png" alt="Free Work 02">
+                </div>
+            </div>
+
+            <div class="image-item-wrapper">
+                <div class="image-container" onclick="openLightbox('images/Free_03.png')">
+                    <img src="images/Free_03.png" alt="Free Work 03">
+                </div>
+            </div>
+
+            <div class="image-item-wrapper">
+                <div class="image-container" onclick="openLightbox('images/Free_04.png')">
+                    <img src="images/Free_04.png" alt="Free Work 04">
+                </div>
+            </div>
+
+            <div class="image-item-wrapper">
+                <div class="image-container" onclick="openLightbox('images/Free_05.png')">
+                    <img src="images/Free_05.png" alt="Free Work 05">
+                </div>
+            </div>
+
+            <div class="image-item-wrapper">
+                <div class="image-container" onclick="openLightbox('images/Free_06.png')">
+                    <img src="images/Free_06.png" alt="Free Work 06">
+                </div>
+            </div>
+
+            <div class="image-item-wrapper">
+                <div class="image-container" onclick="openLightbox('images/Free_07.png')">
+                    <img src="images/Free_07.png" alt="Free Work 07">
+                </div>
+            </div>
+
+            <div class="image-item-wrapper">
+                <div class="image-container" onclick="openLightbox('images/Free_08.png')">
+                    <img src="images/Free_08.png" alt="Free Work 08">
+                </div>
+            </div>
+
+            <div class="image-item-wrapper">
+                <div class="image-container" onclick="openLightbox('images/Free_09.png')">
+                    <img src="images/Free_09.png" alt="Free Work 09">
+                </div>
+            </div>
+
+            <div class="image-item-wrapper">
+                <div class="image-container" onclick="openLightbox('images/Free_10.png')">
+                    <img src="images/Free_10.png" alt="Free Work 10">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- کادر بزرگنمایی عکس (Lightbox) -->
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <button class="close-lightbox" onclick="closeLightbox()">&times;</button>
+        <img class="lightbox-content" id="lightbox-img" onclick="event.stopPropagation()">
+    </div>
+
+    <footer>
+        <p>تمامی حقوق محفوظ است © ۲۰۲۶ صبا کفیلی | All Rights Reserved © 2026 Saba Kafili</p>
+    </footer>
+
+    <script>
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = src;
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('dropdownMenu');
+            menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        // بستن منو با کلیک در بیرون از آن
+        window.onclick = function(event) {
+            if (!event.target.matches('.menu-toggle-btn') && !event.target.closest('.menu-toggle-btn')) {
+                const menu = document.getElementById('dropdownMenu');
+                if (menu && menu.style.display === 'flex') {
+                    menu.style.display = 'none';
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
