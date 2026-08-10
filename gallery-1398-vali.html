@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نمایشگاه گروهی گالری والی | صبا کفیلی</title>
+    <title>Sobhan Gallery Group Exhibition (Showcase) | Saba Kafili</title>
     
     <style>
         :root {
@@ -16,7 +16,7 @@
         }
 
         body {
-            font-family: 'Tahoma', 'B Nazanin', Arial, sans-serif;
+            font-family: Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
@@ -24,7 +24,7 @@
             line-height: 1.9;
         }
 
-        /* هدر و ناوبری */
+        /* Header and Navigation */
         .top-bar {
             display: flex;
             justify-content: space-between;
@@ -54,7 +54,7 @@
             color: #000000;
         }
 
-        /* منوی همبرگری در بالا (تنظیم شده برای RTL) */
+        /* Hamburger Menu (Left Aligned for LTR) */
         .menu-container {
             position: relative;
         }
@@ -85,8 +85,8 @@
             display: none;
             position: absolute;
             top: 55px;
-            right: 0; /* هماهنگ با حالت راست‌چین */
-            left: auto;
+            left: 0; /* Aligned for LTR */
+            right: auto;
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
@@ -108,7 +108,7 @@
             border-radius: 8px;
             transition: background 0.2s;
             display: block;
-            text-align: right;
+            text-align: left;
             background: none;
             border: none;
             width: 100%;
@@ -121,7 +121,7 @@
             color: #000000;
         }
 
-        /* محتوای اصلی و توضیحات */
+        /* Main Content and Description */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -140,14 +140,11 @@
             margin-bottom: 10px;
         }
 
-        .gallery-header h1 span {
-            font-size: 1.3rem;
-            display: block;
-            font-weight: normal;
-            color: var(--text-muted);
-            margin-top: 5px;
-            font-family: Arial, sans-serif;
-            direction: ltr;
+        .gallery-subtitle {
+            font-size: 1.2rem;
+            color: #000000;
+            margin-bottom: 20px;
+            font-weight: bold;
         }
 
         .gallery-desc {
@@ -159,24 +156,13 @@
             padding: 25px 35px;
             border-radius: 15px;
             border: 1px solid var(--border-color);
-            border-right: 4px solid #000000;
-            text-align: justify;
+            border-left: 4px solid #000000; /* Adjusted for LTR */
+            text-align: left;
             box-shadow: 0 4px 15px rgba(0,0,0,0.02);
             line-height: 2.1;
         }
 
-        .gallery-desc-en {
-            direction: ltr;
-            text-align: left;
-            font-family: Arial, sans-serif;
-            color: var(--text-muted);
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px dashed var(--border-color);
-            font-size: 1rem;
-        }
-
-        /* گرید تصاویر با اطلاعات */
+        /* Image Grid */
         .image-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -223,7 +209,7 @@
             transform: scale(1.04);
         }
 
-        /* مدال (بزرگنمایی عکس با کلیک) */
+        /* Lightbox Modal */
         .lightbox-modal {
             display: none;
             position: fixed;
@@ -257,7 +243,7 @@
         .close-lightbox {
             position: absolute;
             top: 25px;
-            left: 35px;
+            right: 35px; /* Adjusted for LTR */
             color: #fff;
             font-size: 2.5rem;
             cursor: pointer;
@@ -298,11 +284,11 @@
             width: 100%;
             position: relative;
             box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-            text-align: right;
+            text-align: left; /* Adjusted for LTR */
             border: 1px solid var(--border-color);
         }
 
-        /* انیمیشن‌ها */
+        /* Animations */
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -338,75 +324,59 @@
 <body>
 
     <div class="top-bar">
-        <a href="index.html" class="back-btn">&larr; بازگشت به صفحه اصلی / Back</a>
+        <a href="index.html" class="back-btn">&larr; Back to Home</a>
         
-        <!-- منوی همبرگری -->
+        <!-- Hamburger Menu -->
         <div class="menu-container">
-            <button class="menu-toggle-btn" onclick="toggleMenu()" aria-label="منوی سایت">
+            <button class="menu-toggle-btn" onclick="toggleMenu()" aria-label="Site Menu">
                 &#9776;
             </button>
             <div class="dropdown-menu" id="dropdownMenu">
-                <a href="index.html">صفحه اصلی / Home</a>
-                <a href="mailto:kafilisaba@gmail.com">ارسال ایمیل / Email</a>
-                <a href="https://instagram.com/saba_kafili_art" target="_blank">اینستاگرام / Instagram</a>
-                <button onclick="openEducationModal()">سوابق تحصیلی / Education</button>
+                <a href="index.html">Home</a>
+                <a href="mailto:kafilisaba@gmail.com">Email</a>
+                <a href="https://instagram.com/saba_kafili_art" target="_blank">Instagram</a>
+                <button onclick="openEducationModal()">Education</button>
             </div>
         </div>
     </div>
 
     <div class="container">
         <div class="gallery-header">
-            <h1>نمایشگاه گروهی، گالری والی (۱۳۹۸)<span>Group Exhibition, Vali Gallery (2019)</span></h1>
+            <h1>Group Exhibition, Sobhan Gallery (2013)</h1>
+            <div class="gallery-subtitle">Showcase</div>
             <div class="gallery-desc">
-                خاورمیانه، گالوانیزه و پاپیه‌ماشه، قطر ۵۸ سانتی‌متر، ۱۳۹۸
-                <div class="gallery-desc-en">
-                    Middle East, Galvanized and Papier-mâché, Diameter: 58 cm, 2019
-                </div>
+                Behind every showcase lies a narrative of desire, consumption, and hidden identity; where the gaze judges before making a choice.
             </div>
         </div>
 
-        <!-- گرید تصاویر گالری والی با اطلاعات دو زبانه -->
+        <!-- Sobhan Gallery Image Grid -->
         <div class="image-grid">
 
-            <!-- اثر ۱ -->
+            <!-- Artwork 1 -->
             <div class="artwork-card">
-                <div class="image-container" onclick="openLightbox('images/Vali_01.png')">
-                    <img src="images/Vali_01.png" alt="Vali 01">
+                <div class="image-container" onclick="openLightbox('images/Sobhan_Gallery_02.png')">
+                    <img src="images/Sobhan_Gallery_02.png" alt="Sobhan Gallery 02">
                 </div>
             </div>
 
-            <!-- اثر ۲ -->
+            <!-- Artwork 2 -->
             <div class="artwork-card">
-                <div class="image-container" onclick="openLightbox('images/Vali_02.png')">
-                    <img src="images/Vali_02.png" alt="Vali 02">
-                </div>    
-            </div>
-
-            <!-- اثر ۳ -->
-            <div class="artwork-card">
-                <div class="image-container" onclick="openLightbox('images/Vali_03.png')">
-                    <img src="images/Vali_03.png" alt="Vali 03">
+                <div class="image-container" onclick="openLightbox('images/Sobhan_Gallery_03.png')">
+                    <img src="images/Sobhan_Gallery_03.png" alt="Sobhan Gallery 03">
                 </div>
             </div>
 
-            <!-- اثر ۴ -->
+            <!-- Artwork 3 -->
             <div class="artwork-card">
-                <div class="image-container" onclick="openLightbox('images/Vali_04.png')">
-                    <img src="images/Vali_04.png" alt="Vali 04">
-                </div>
-            </div>
-
-            <!-- اثر ۵ -->
-            <div class="artwork-card">
-                <div class="image-container" onclick="openLightbox('images/Vali_05.png')">
-                    <img src="images/Vali_05.png" alt="Vali 05">
+                <div class="image-container" onclick="openLightbox('images/Sobhan_Gallery_04.png')">
+                    <img src="images/Sobhan_Gallery_04.png" alt="Sobhan Gallery 04">
                 </div>
             </div>
 
         </div>
     </div>
 
-    <!-- کادر بزرگنمایی عکس (Lightbox) -->
+    <!-- Lightbox Modal -->
     <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
         <button class="close-lightbox" onclick="closeLightbox()">&times;</button>
         <img class="lightbox-content" id="lightbox-img" onclick="event.stopPropagation()">
@@ -415,30 +385,30 @@
     <!-- Education Modal -->
     <div id="educationModal" class="education-modal" onclick="closeEducationModalOutside(event)">
         <div class="education-card-content">
-            <button onclick="closeEducationModal()" style="position: absolute; top: 20px; left: 20px; right: auto; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--text-muted);">&times;</button>
+            <button onclick="closeEducationModal()" style="position: absolute; top: 20px; right: 20px; left: auto; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--text-muted);">&times;</button>
             
-            <h2 style="margin-top: 0; color: #000; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; font-size: 1.4rem;">سوابق تحصیلی و مدارک / Education & Certificates</h2>
+            <h2 style="margin-top: 0; color: #000; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; font-size: 1.4rem;">Education & Certificates</h2>
             
             <div style="margin: 20px 0; line-height: 2.2;">
                 <p style="margin-bottom: 15px;">
-                    🎓 <strong style="color: var(--text-main);">کارشناسی گرافیک (لـیسانس) / Bachelor of Arts in Graphic Design</strong><br>
-                    <span style="color: var(--text-muted);">دانشگاه سوره (فارغ‌التحصیل ۱۳۸۶) / Soore University (Graduated 2007)</span>
+                    🎓 <strong style="color: var(--text-main);">Bachelor of Arts in Graphic Design</strong><br>
+                    <span style="color: var(--text-muted);">Soore University (Graduated 2007)</span>
                 </p>
                 <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 15px 0;">
                 <p style="margin-bottom: 0;">
-                    📜 <strong style="color: var(--text-main);">مربی نقاشی کودک / Child Painting Instructor Certificate</strong><br>
-                    <span style="color: var(--text-muted);">سازمان آموزش فنی و حرفه‌ای (مدت دوره: ۱۷۴ ساعت) / Issuer: Technical and Vocational Training Organization (Duration: 174 hours)</span>
+                    📜 <strong style="color: var(--text-main);">Child Painting Instructor Certificate</strong><br>
+                    <span style="color: var(--text-muted);">Technical and Vocational Training Organization (Duration: 174 hours)</span>
                 </p>
             </div>
             
             <div style="text-align: center; margin-top: 30px;">
-                <button onclick="closeEducationModal()" style="background: var(--accent-color); color: #ffffff; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer; font-weight: bold;">بستن / Close</button>
+                <button onclick="closeEducationModal()" style="background: var(--accent-color); color: #ffffff; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer; font-weight: bold;">Close</button>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>تمامی حقوق محفوظ است © ۲۰۲۶ صبا کفیلی | All Rights Reserved © 2026 Saba Kafili</p>
+        <p>All Rights Reserved © 2026 Saba Kafili</p>
     </footer>
 
     <script>
@@ -475,7 +445,7 @@
             }
         }
 
-        // بستن منو با کلیک در بیرون از آن
+        // Close menu when clicking outside
         window.onclick = function(event) {
             if (!event.target.matches('.menu-toggle-btn') && !event.target.closest('.menu-toggle-btn')) {
                 const menu = document.getElementById('dropdownMenu');
