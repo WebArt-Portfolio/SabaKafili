@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>گالری آثار آزاد | صبا کفیلی</title>
+    <title>Free Works Gallery | Saba Kafili</title>
     
     <style>
         :root {
@@ -16,7 +16,7 @@
         }
 
         body {
-            font-family: 'Tahoma', 'B Nazanin', Arial, sans-serif;
+            font-family: Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
@@ -24,7 +24,7 @@
             line-height: 1.9;
         }
 
-        /* هدر و ناوبری */
+        /* Header and Navigation */
         .top-bar {
             display: flex;
             justify-content: space-between;
@@ -54,7 +54,7 @@
             color: #000000;
         }
 
-        /* منوی همبرگری در بالا */
+        /* Hamburger Menu (Left Aligned for LTR) */
         .menu-container {
             position: relative;
         }
@@ -85,7 +85,8 @@
             display: none;
             position: absolute;
             top: 55px;
-            left: 0;
+            left: 0; /* Aligned for LTR */
+            right: auto;
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
@@ -114,7 +115,7 @@
             color: #000000;
         }
 
-        /* محتوای اصلی و توضیحات */
+        /* Main Content and Description */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -152,8 +153,8 @@
             padding: 25px 35px;
             border-radius: 15px;
             border: 1px solid var(--border-color);
-            border-right: 4px solid #000000;
-            text-align: justify;
+            border-left: 4px solid #000000; /* Adjusted for LTR */
+            text-align: left; /* Adjusted for LTR */
             box-shadow: 0 4px 15px rgba(0,0,0,0.02);
             line-height: 2.1;
         }
@@ -169,7 +170,7 @@
             font-size: 1rem;
         }
 
-        /* گرید تصاویر با موشن زیبا */
+        /* Image Grid with Motion */
         .image-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -190,7 +191,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.03);
         }
 
-        /* تأخیر آبشاری برای کارت‌ها */
+        /* Staggered Delay for Cards */
         .image-item-wrapper:nth-child(1) { animation-delay: 0.1s; }
         .image-item-wrapper:nth-child(2) { animation-delay: 0.2s; }
         .image-item-wrapper:nth-child(3) { animation-delay: 0.3s; }
@@ -231,7 +232,7 @@
             transform: scale(1.04);
         }
 
-        /* مدال (بزرگنمایی عکس با کلیک) */
+        /* Lightbox Modal */
         .lightbox-modal {
             display: none;
             position: fixed;
@@ -265,7 +266,7 @@
         .close-lightbox {
             position: absolute;
             top: 25px;
-            left: 35px;
+            right: 35px; /* Adjusted for LTR */
             color: #fff;
             font-size: 2.5rem;
             cursor: pointer;
@@ -278,7 +279,7 @@
             color: #cbd5e1;
         }
 
-        /* انیمیشن‌ها */
+        /* Animations */
         @keyframes fadeInUp {
             to {
                 opacity: 1;
@@ -321,33 +322,33 @@
 <body>
 
     <div class="top-bar">
-        <a href="index.html" class="back-btn">← بازگشت به صفحه اصلی / Back</a>
+        <a href="index.html" class="back-btn">&larr; Back to Home</a>
         
-        <!-- منوی همبرگری -->
+        <!-- Hamburger Menu -->
         <div class="menu-container">
-            <button class="menu-toggle-btn" onclick="toggleMenu()" aria-label="منوی سایت">
-                ☰
+            <button class="menu-toggle-btn" onclick="toggleMenu()" aria-label="Site Menu">
+                &#9776;
             </button>
             <div class="dropdown-menu" id="dropdownMenu">
-                <a href="index.html">صفحه اصلی / Home</a>
-                <a href="mailto:kafilisaba@gmail.com">ارسال ایمیل / Email</a>
-                <a href="https://instagram.com/saba_kafili_art" target="_blank">اینستاگرام / Instagram</a>
+                <a href="index.html">Home</a>
+                <a href="mailto:kafilisaba@gmail.com">Email</a>
+                <a href="https://instagram.com/saba_kafili_art" target="_blank">Instagram</a>
             </div>
         </div>
     </div>
 
     <div class="container">
         <div class="gallery-header">
-            <h1>گالری آثار آزاد<span>Free Works Gallery</span></h1>
+            <h1>Free Works Gallery</h1>
             <div class="gallery-desc">
-                مجموعه‌ای از آثار آزاد و تجربی، شامل نقاشی‌ها، تصویرسازی‌ها و پروژه‌های بین‌رشته‌ای که در فضایی رها از چارچوب‌های مرسوم شکل گرفته‌اند.
+                A collection of free and experimental works, including paintings, illustrations, and interdisciplinary projects formed beyond conventional frameworks.
                 <div class="gallery-desc-en">
                     A collection of free and experimental works, including paintings, illustrations, and interdisciplinary projects formed beyond conventional frameworks.
                 </div>
             </div>
         </div>
 
-        <!-- گرید تصاویر آثار آزاد (۱۰ تصویر) -->
+        <!-- Image Grid (10 Images) -->
         <div class="image-grid">
             <div class="image-item-wrapper">
                 <div class="image-container" onclick="openLightbox('images/Free_01.png')">
@@ -411,14 +412,14 @@
         </div>
     </div>
 
-    <!-- کادر بزرگنمایی عکس (Lightbox) -->
+    <!-- Lightbox Modal -->
     <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
         <button class="close-lightbox" onclick="closeLightbox()">&times;</button>
         <img class="lightbox-content" id="lightbox-img" onclick="event.stopPropagation()">
     </div>
 
     <footer>
-        <p>تمامی حقوق محفوظ است © ۲۰۲۶ صبا کفیلی | All Rights Reserved © 2026 Saba Kafili</p>
+        <p>All Rights Reserved &copy; 2026 Saba Kafili</p>
     </footer>
 
     <script>
@@ -439,7 +440,7 @@
             menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
         }
 
-        // بستن منو با کلیک در بیرون از آن
+        // Close menu when clicking outside
         window.onclick = function(event) {
             if (!event.target.matches('.menu-toggle-btn') && !event.target.closest('.menu-toggle-btn')) {
                 const menu = document.getElementById('dropdownMenu');
